@@ -1,0 +1,7 @@
+#################################################
+Search API (November Changes) 
+#################################################
+
+
+<ip address>:<port>/<Index>/_search
+{	"query": {	  "bool": {	    "should": [			{"match": { "_all": { "query": <query>, "fuzziness": "AUTO", "operator": "or", "prefix_length": "1" } } },			{"match": { "project_name": { "query": <query> } } },			{"match": { "project_description": { "query": <query> } } },			{"match": { "content": { "query": <query>} } },			{"match": { "language": { "query": <query>} } }	     ]	  }	},	"size": "1000"}
