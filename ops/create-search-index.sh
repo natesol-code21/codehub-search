@@ -10,7 +10,7 @@
 
 SUCCESS=0
 ERROR=1
-HOST=localhost
+HOST=$1
 PORT=9200
 INDEX=projects
 
