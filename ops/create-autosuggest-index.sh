@@ -10,17 +10,17 @@
 
 SUCCESS=0
 ERROR=1
-HOST=localhost
+HOST=54.165.103.241
 PORT=9200
-INDEX=suggest_projects1
+INDEX=projects_nate
 TYPE=project
 
 STATUS=$(curl -so /dev/null -w '%{response_code}' http://$HOST:$PORT/$INDEX)
 
 if [ "$STATUS" -eq 200 ]; then
    echo "Index exists ... Updating Index Mappings and Settings"
-   curl -X POST http://localhost:9200/$INDEX/_close
-   curl -X PUT http://localhost:9200/$INDEX/_settings -d '{
+   curl -X POST http://$HOST:$PORT/$INDEX/_close
+   curl -X PUT http://$HOST:$PORT/$INDEX/_settings -d '{
    "analysis": {
        "analyzer": {
            "title_contributors_desc_readme_analyzer": {
@@ -74,8 +74,8 @@ if [ "$STATUS" -eq 200 ]; then
        }
    }
  }'
- curl -X POST http://localhost:9200/$INDEX/_open
- curl -X PUT http://localhost:9200/$INDEX/$TYPE/_mapping?ignore_conflicts=true -d '{
+ curl -X POST http://$HOST:$PORT/$INDEX/_open
+ curl -X PUT http://$HOST:$PORT/$INDEX/$TYPE/_mapping?ignore_conflicts=true -d '{
    "project" : {
         "properties" : {
           "commits" : {
@@ -116,6 +116,33 @@ if [ "$STATUS" -eq 200 ]; then
             "index": "not_analyzed",
             "include_in_all": false
           },
+          "forks" : {
+          "type":"object",
+          "dynamic":"false",
+          "properties": {
+            "forkedRepos" : {
+                "type":"object",
+                "dynamic":"false",
+                "properties" : {
+                    "id" : {
+                          "type" : "string",
+                          "index": "no",
+                          "include_in_all": false
+                     },
+                    "name" : {
+                          "type" : "string",
+                          "index": "no",
+                          "include_in_all": false
+                     },
+                    "org_name" : {
+                          "type" : "string",
+                          "index": "no",
+                          "include_in_all": false
+                    }
+                }
+                }
+          }
+        },
           "full_name" : {
             "type" : "string",
             "index": "not_analyzed",
@@ -129,6 +156,10 @@ if [ "$STATUS" -eq 200 ]; then
           "language" : {
             "type" : "string",
             "analyzer" : "language_analyzer"
+          },
+          "languages" : {
+            "type":"object"
+            "dynamic":"false"
           },
           "organization" : {
             "properties" : {
@@ -211,6 +242,10 @@ if [ "$STATUS" -eq 200 ]; then
             "index": "no",
             "include_in_all": false
           },
+          "suggest":{
+            "type":"object",
+            "dynamic":"false"
+          }
           "updated_at" : {
             "type" : "date",
             "format" : "strict_date_optional_time||epoch_millis",
@@ -325,6 +360,33 @@ elif [ "$STATUS" -eq 404 ]; then
                 "index": "not_analyzed",
                 "include_in_all": false
               },
+              "forks" : {
+        	    "type":"object",
+              "dynamic":"false",
+        	    "properties": {
+        		    "forkedRepos" : {
+  	                "type":"object",
+                    "dynamic":"false",
+              			"properties" : {
+              			    "id" : {
+                				      "type" : "string",
+                              "index": "no",
+                              "include_in_all": false
+                			   },
+              			    "name" : {
+              				        "type" : "string",
+                              "index": "no",
+                              "include_in_all": false
+        			           },
+              			    "org_name" : {
+              				        "type" : "string",
+                              "index": "no",
+                              "include_in_all": false
+              			    }
+              			}
+        	    	    }
+        	    }
+        	  },
               "full_name" : {
                 "type" : "string",
                 "index": "not_analyzed",
@@ -338,6 +400,10 @@ elif [ "$STATUS" -eq 404 ]; then
               "language" : {
                 "type" : "string",
                 "analyzer" : "language_analyzer"
+              },
+              "languages" : {
+                "type" : "object",
+                "dynamic":"false"
               },
               "organization" : {
                 "properties" : {
@@ -419,6 +485,10 @@ elif [ "$STATUS" -eq 404 ]; then
                 "type" : "long",
                 "index": "no",
                 "include_in_all": false
+              },
+              "suggest":{
+                "type":"object",
+                "dynamic":"false"
               },
               "updated_at" : {
                 "type" : "date",
