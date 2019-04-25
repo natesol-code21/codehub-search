@@ -88,7 +88,7 @@ node {
       stage('Register TaskDefinition Updates') {
       dir ('App'){
           script {
-              sh 'aws ecs register-task-definition --cli-input-json file://codehub-ui-taskDefinition.json --region us-east-1'
+              sh 'aws ecs register-task-definition --cli-input-json file://codehub-search-taskDefinition.json --region us-east-1'
               sh 'echo Service is Updated'
           }
       }
