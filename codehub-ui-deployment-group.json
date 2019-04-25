@@ -24,15 +24,15 @@
         {
           "targetGroups": [
              {
-                 "name": "dev-codehub-external-target1"
+                 "name": "dev-codehub-search-target1"
              },
              {
-                 "name": "dev-codehub-external-target2"
+                 "name": "dev-codehub-search-target2"
              }
           ],
           "prodTrafficRoute": {
               "listenerArns": [
-                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-external/6a2a7de71ec922d8/0b8a0dca9fe18b35"
+                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-search/34e6884735543393/407e4d304f8e0f3f"
               ]
           }
         }

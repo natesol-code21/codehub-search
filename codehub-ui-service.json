@@ -4,9 +4,9 @@
     "taskDefinition": "codehub-search",
     "loadBalancers": [
         {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-external-target2/be97f5c98648cfbf",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-search-target1/a6918cb2f4e7311f",
             "containerName": "codehub-search",
-            "containerPort": 80
+            "containerPort": 9200
         }
     ],
     "launchType": "FARGATE",
@@ -18,7 +18,7 @@
     "networkConfiguration": {
        "awsvpcConfiguration": {
           "assignPublicIp": "DISABLED",
-          "securityGroups": [ "sg-0195b8748c970c554","sg-07d89bf37a22f548e","sg-0cc4fb9676d06b95c"],
+          "securityGroups": [ "sg-0195b8748c970c554","sg-07d89bf37a22f548e","sg-0cc4fb9676d06b95c","sg-0cc94e30beacbeff5","sg-0bd49a1dfe5fded6a"],
           "subnets": [ "subnet-0e3a4804e04a9bccf", "subnet-0b76afe0a166e6f7b","subnet-0c5bb2a7c96071eff","subnet-0e3b14a2e83c2c5ce","subnet-015520990db354076","subnet-0efabf0fc5dbb82d6"]
        }
     },

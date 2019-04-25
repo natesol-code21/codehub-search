@@ -7,7 +7,7 @@
                 "image": "797335914619.dkr.ecr.us-east-1.amazonaws.com/dev-codehub/codehub-search:latest",
                 "portMappings": [
                   {
-                    "containerPort": 80
+                    "containerPort": 9200
                   }
                 ],
                 "essential": true
