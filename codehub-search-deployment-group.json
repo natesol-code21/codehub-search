@@ -32,7 +32,7 @@
           ],
           "prodTrafficRoute": {
               "listenerArns": [
-                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-search/34e6884735543393/407e4d304f8e0f3f"
+                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-search/d7eedb97f0dcc767/ab55398ee6252fc5"
               ]
           }
         }
