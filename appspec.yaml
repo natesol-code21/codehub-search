@@ -3,8 +3,8 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-east-1:927373803645:task-definition/codehub-ui:77"
+        TaskDefinition: "arn:aws:ecs:us-east-1:927373803645:task-definition/codehub-search:1"
         LoadBalancerInfo:
-          ContainerName: "codehub-ui"
+          ContainerName: "codehub-search"
           ContainerPort: 80
         PlatformVersion: "LATEST"
