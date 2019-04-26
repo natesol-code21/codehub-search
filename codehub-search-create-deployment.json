@@ -4,7 +4,7 @@
     "revision": {
         "revisionType": "S3",
         "s3Location": {
-            "bucket": "codehub-dev",
+            "bucket": "codehub-dev-search",
             "key": "search/appspec.yaml",
             "bundleType": "YAML"
         }
