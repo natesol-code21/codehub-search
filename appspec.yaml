@@ -8,3 +8,5 @@ Resources:
           ContainerName: "codehub-search"
           ContainerPort: 9200
         PlatformVersion: "LATEST"
+Hooks:
+  - AfterAllowTraffic: "AfterAllowTrafficHookFunctionName"

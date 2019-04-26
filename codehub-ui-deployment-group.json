@@ -24,21 +24,21 @@
         {
           "targetGroups": [
              {
-                 "name": "dev-codehub-search-target1"
+                 "name": "codehub-search-target1"
              },
              {
-                 "name": "dev-codehub-search-target2"
+                 "name": "codehub-search-target2"
              }
           ],
           "prodTrafficRoute": {
               "listenerArns": [
-                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-search/d7eedb97f0dcc767/ab55398ee6252fc5"
+                  "arn:aws:elasticloadbalancing:us-east-1:927373803645:listener/app/codehub-ui-dev-elb/73459d4e8049ec2d/5cba96d783ef07cc"
               ]
           }
         }
       ]
    },
-   "serviceRoleArn": "arn:aws:iam::797335914619:role/BAHCodeDeployRoleForECS",
+   "serviceRoleArn": "arn:aws:iam::927373803645:role/CodeDeployServiceRole",
    "ecsServices": [
        {
            "serviceName": "codehub-search-service",
