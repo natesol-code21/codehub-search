@@ -4,7 +4,7 @@
     "taskDefinition": "codehub-search",
     "loadBalancers": [
         {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-search-target1/4425b716ec76106c",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-search-target2/5c76498f6ad08f1e",
             "containerName": "codehub-search",
             "containerPort": 9200
         }
