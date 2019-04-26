@@ -101,7 +101,7 @@ node {
               sh 'npm install js-yaml'
               sh 'node process_appspec.js $(aws ecs list-task-definitions --region us-east-1 --family-prefix codehub-search | jq -r ".taskDefinitionArns[-1]")'
               sh 'cat appspec.yaml'
-              sh 'aws s3 cp appspec.yaml s3://codehub-dev/search'
+              sh 'aws s3 cp appspec.yaml s3://codehub-dev-search'
               sh 'aws deploy create-deployment --cli-input-json file://codehub-search-create-deployment.json --region us-east-1'
           }
         }
