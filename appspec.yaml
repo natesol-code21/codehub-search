@@ -3,10 +3,10 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-east-1:797335914619:task-definition/codehub-search:20"
+        TaskDefinition: "arn:aws:ecs:us-east-1:927373803645:task-definition/codehub-search:20"
         LoadBalancerInfo:
           ContainerName: "codehub-search"
           ContainerPort: 9200
         PlatformVersion: "LATEST"
 Hooks:
-  - AfterAllowTraffic: "AfterAllowTrafficHookFunctionName"
+  - AfterAllowTraffic: "bashFunction"
