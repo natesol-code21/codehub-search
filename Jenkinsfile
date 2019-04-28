@@ -11,7 +11,7 @@ node {
           deleteDir()
           dir ('App'){
               git(
-                branch: 'dev_cicd_devops',
+                branch: 'dev_cicd_devops2',
                 url: 'https://github.com/usdot-jpo-codehub/codehub-search.git'
             )
           }
