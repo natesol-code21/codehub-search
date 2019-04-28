@@ -22,8 +22,6 @@ node {
         nodejs('node') {
             dir ('App'){
               script {
-                //sh 'npm install elasticdump'
-
                 sh 'echo Bundling is Complete!!'
             }
           }
@@ -36,9 +34,8 @@ node {
         script {
             def scannerHome = tool 'SonarQube Scanner 2.8';
             withSonarQubeEnv('SonarQube') {
-                    sh 'ls "${scannerHome}"/bin/'
                     sh 'cat /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner_2.8/conf/sonar-scanner.properties'
-                    //sh "${scannerHome}/bin/sonar-scanner -X  -Dsonar.projectName=codehub-search -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-search -Dsonar.sources=."
+                    sh "${scannerHome}/bin/sonar-scanner -X  -Dsonar.projectName=codehub-search -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-search -Dsonar.sources=."
                 }
             }
         }
@@ -100,13 +97,20 @@ node {
             script {
               sh 'npm install js-yaml -g'
               sh 'npm install js-yaml'
+              sh 'npm install elasticdump -g'
+              sh 'elasticdump --version'
               sh 'node process_appspec.js $(aws ecs list-task-definitions --region us-east-1 --family-prefix codehub-search | jq -r ".taskDefinitionArns[-1]")'
-              sh 'cat appspec.yaml'
               sh 'aws s3 cp appspec.yaml s3://codehub-dev-data'
-              //sh 'aws deploy register-application-revision --application-name codehub-search --s3-location bucket=codehub-dev,key=appspec.yaml,bundleType=yaml --region us-east-1'
-              sh 'aws deploy create-deployment --cli-input-json file://codehub-search-create-deployment.json --region us-east-1'
-              //sh 'aws deploy put-lifecycle-event-hook-execution-status --deployment-id <deployment-id> --status Succeeded --lifecycle-event-hook-execution-id <execution-id> --region <region>'
-          }
+              sh 'aws deploy wait deployment-successful --deployment-id $(aws deploy create-deployment --cli-input-json file://codehub-search-create-deployment.json --region us-east-1 | jq -r ".deploymentId")'
+              sh 'aws s3 sync s3://codehub-updated-data .'
+              sh 'ls -l '
+              sh './create-search-index.sh'
+              sh 'elasticdump --input=projects_data.json --output=http://internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com:9200/projects --type=data'
+              sh 'elasticdump --input=code_data.json --output=http://internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com:9200/code --type=data'
+              sh 'echo Successfull Deployment Confirmed!!'
+              sh 'echo Updated ES Indices are Updated!!'
+              sh 'echo ES Updated With Latest Data!!'
+            }
         }
 }
 }
