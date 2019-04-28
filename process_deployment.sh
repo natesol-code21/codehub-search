@@ -10,8 +10,8 @@ aws deploy wait deployment-successful --deployment-id $(aws deploy create-deploy
 aws s3 sync s3://codehub-dev-data-update .
 ls -l
 ./create-search-index.sh
-elasticdump --input=projects_data.json --output=http://internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com:9200/projects --type=data
-elasticdump --input=code_data.json --output=http://internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com:9200/code --type=data
+elasticdump --input=projects_data.json --output=http://internal-dev-codehub-search-118857287.us-east-1.elb.amazonaws.com:9200/projects --type=data
+elasticdump --input=code_data.json --output=http://internal-dev-codehub-search-118857287.us-east-1.elb.amazonaws.com:9200/code --type=data
 echo Successfull Deployment Confirmed!!
 echo Updated ES Indices are Updated!!
 echo ES Updated With Latest Data!!
