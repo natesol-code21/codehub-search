@@ -95,21 +95,7 @@ node {
       dir ('App'){
       nodejs('node') {
             script {
-              sh 'npm install js-yaml -g'
-              sh 'npm install js-yaml'
-              sh 'npm install elasticdump -g'
-              sh 'elasticdump --version'
-              sh 'node process_appspec.js $(aws ecs list-task-definitions --region us-east-1 --family-prefix codehub-search | jq -r ".taskDefinitionArns[-1]")'
-              sh 'aws s3 cp appspec.yaml s3://codehub-dev-data'
-              sh 'aws deploy wait deployment-successful --deployment-id $(aws deploy create-deployment --cli-input-json file://codehub-search-create-deployment.json --region us-east-1 | jq -r ".deploymentId")'
-              sh 'aws s3 sync s3://codehub-updated-data .'
-              sh 'ls -l '
-              sh './create-search-index.sh'
-              sh 'elasticdump --input=projects_data.json --output=http://internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com:9200/projects --type=data'
-              sh 'elasticdump --input=code_data.json --output=http://internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com:9200/code --type=data'
-              sh 'echo Successfull Deployment Confirmed!!'
-              sh 'echo Updated ES Indices are Updated!!'
-              sh 'echo ES Updated With Latest Data!!'
+              sh './process_deployment.sh'
             }
         }
 }
