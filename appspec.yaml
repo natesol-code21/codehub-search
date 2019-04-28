@@ -9,4 +9,4 @@ Resources:
           ContainerPort: 9200
         PlatformVersion: "LATEST"
 Hooks:
-  - AfterAllowTraffic: "bashFunction"
+  - BeforeAllowTraffic: "bashFunction"
