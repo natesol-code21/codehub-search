@@ -10,7 +10,7 @@
 
 SUCCESS=0
 ERROR=1
-HOST=0.0.0.0
+HOST=internal-dev-codehub-search-391428177.us-east-1.elb.amazonaws.com
 PORT=9200
 INDEX=projects
 TYPE=project
